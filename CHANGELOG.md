@@ -2,6 +2,12 @@
 
 All notable changes to xloader will be documented in this file.
 
+## [0.1.0.1] - 2026-04-08
+
+### Changed
+- Switch package manager from npm to bun for faster installs and script execution
+- Exclude npm/yarn lockfiles from git to prevent accidental lockfile conflicts
+
 ## [0.1.0.0] - 2026-04-08
 
 ### Added
