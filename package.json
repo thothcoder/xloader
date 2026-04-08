@@ -3,6 +3,7 @@
   "description": "Browse and download media from any public X account",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "bun@1.3.11",
   "type": "module",
   "scripts": {
     "dev": "wxt",

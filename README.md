@@ -11,8 +11,8 @@ Browse and download media (images, videos, GIFs) from any public X account. Chro
 ```bash
 git clone https://github.com/thothcoder/xloader.git
 cd xloader
-npm install
-npm run build
+bun install
+bun run build
 ```
 
 2. Open Chrome and go to `chrome://extensions`
@@ -22,7 +22,7 @@ npm run build
 ### Development
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 This starts WXT in dev mode with hot reload. The extension auto-reloads on file changes.
@@ -83,8 +83,8 @@ Offscreen Document
 ## Testing
 
 ```bash
-npm test          # run once
-npm run test:watch # watch mode
+bun run test      # run once
+bun run test:watch # watch mode
 ```
 
 28 tests covering parser, auth, discovery, and download engine.
