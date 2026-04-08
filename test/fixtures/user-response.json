@@ -1,0 +1,16 @@
+{
+  "data": {
+    "user": {
+      "result": {
+        "__typename": "User",
+        "rest_id": "123456789",
+        "legacy": {
+          "name": "waneella",
+          "screen_name": "waneella_",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/123/avatar_normal.jpg",
+          "protected": false
+        }
+      }
+    }
+  }
+}
