@@ -3,4 +3,6 @@ node_modules/
 .output/
 dist/
 *.tgz
+package-lock.json
+yarn.lock
 .DS_Store
