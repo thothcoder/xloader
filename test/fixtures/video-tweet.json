@@ -1,0 +1,69 @@
+{
+  "data": {
+    "user": {
+      "result": {
+        "timeline_v2": {
+          "timeline": {
+            "instructions": [
+              {
+                "type": "TimelineAddEntries",
+                "entries": [
+                  {
+                    "entryId": "tweet-5555555555",
+                    "content": {
+                      "itemContent": {
+                        "tweet_results": {
+                          "result": {
+                            "__typename": "Tweet",
+                            "rest_id": "5555555555",
+                            "legacy": {
+                              "id_str": "5555555555",
+                              "created_at": "Fri Mar 17 10:00:00 +0000 2026",
+                              "extended_entities": {
+                                "media": [
+                                  {
+                                    "type": "video",
+                                    "media_url_https": "https://pbs.twimg.com/ext_tw_video_thumb/5555555555/pu/img/poster.jpg",
+                                    "original_info": { "width": 1280, "height": 720 },
+                                    "video_info": {
+                                      "duration_millis": 30000,
+                                      "variants": [
+                                        {
+                                          "content_type": "application/x-mpegURL",
+                                          "url": "https://video.twimg.com/ext_tw_video/5555555555/pu/pl/manifest.m3u8"
+                                        },
+                                        {
+                                          "bitrate": 256000,
+                                          "content_type": "video/mp4",
+                                          "url": "https://video.twimg.com/ext_tw_video/5555555555/pu/vid/480x270/low.mp4"
+                                        },
+                                        {
+                                          "bitrate": 832000,
+                                          "content_type": "video/mp4",
+                                          "url": "https://video.twimg.com/ext_tw_video/5555555555/pu/vid/640x360/med.mp4"
+                                        },
+                                        {
+                                          "bitrate": 2176000,
+                                          "content_type": "video/mp4",
+                                          "url": "https://video.twimg.com/ext_tw_video/5555555555/pu/vid/1280x720/high.mp4"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
