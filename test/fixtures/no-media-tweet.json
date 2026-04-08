@@ -1,0 +1,39 @@
+{
+  "data": {
+    "user": {
+      "result": {
+        "timeline_v2": {
+          "timeline": {
+            "instructions": [
+              {
+                "type": "TimelineAddEntries",
+                "entries": [
+                  {
+                    "entryId": "tweet-1111111111",
+                    "content": {
+                      "itemContent": {
+                        "tweet_results": {
+                          "result": {
+                            "__typename": "Tweet",
+                            "rest_id": "1111111111",
+                            "legacy": {
+                              "id_str": "1111111111",
+                              "created_at": "Mon Mar 20 09:00:00 +0000 2026",
+                              "entities": {
+                                "urls": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
