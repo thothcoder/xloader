@@ -2,6 +2,7 @@ import { defineConfig } from "wxt";
 import preact from "@preact/preset-vite";
 
 export default defineConfig({
+  outDir: "output",
   vite: () => ({
     plugins: [preact()],
   }),

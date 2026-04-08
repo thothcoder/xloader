@@ -1,0 +1,95 @@
+{
+  "data": {
+    "user": {
+      "result": {
+        "timeline_v2": {
+          "timeline": {
+            "instructions": [
+              {
+                "type": "TimelineAddEntries",
+                "entries": [
+                  {
+                    "entryId": "profile-grid-0",
+                    "content": {
+                      "__typename": "TimelineTimelineModule",
+                      "items": [
+                        {
+                          "entryId": "profile-grid-0-tweet-1111111111",
+                          "item": {
+                            "itemContent": {
+                              "__typename": "TimelineTweet",
+                              "tweet_results": {
+                                "result": {
+                                  "__typename": "Tweet",
+                                  "rest_id": "1111111111",
+                                  "legacy": {
+                                    "id_str": "1111111111",
+                                    "created_at": "Mon Apr 07 10:00:00 +0000 2026",
+                                    "extended_entities": {
+                                      "media": [
+                                        {
+                                          "type": "photo",
+                                          "media_url_https": "https://pbs.twimg.com/media/module1.jpg",
+                                          "original_info": { "width": 1600, "height": 900 }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "entryId": "profile-grid-0-tweet-2222222222",
+                          "item": {
+                            "itemContent": {
+                              "__typename": "TimelineTweet",
+                              "tweet_results": {
+                                "result": {
+                                  "__typename": "Tweet",
+                                  "rest_id": "2222222222",
+                                  "legacy": {
+                                    "id_str": "2222222222",
+                                    "created_at": "Mon Apr 07 09:00:00 +0000 2026",
+                                    "extended_entities": {
+                                      "media": [
+                                        {
+                                          "type": "video",
+                                          "media_url_https": "https://pbs.twimg.com/ext_tw_video_thumb/2222222222/pu/img/thumb.jpg",
+                                          "original_info": { "width": 1280, "height": 720 },
+                                          "video_info": {
+                                            "duration_millis": 15000,
+                                            "variants": [
+                                              { "content_type": "application/x-mpegURL", "url": "https://video.twimg.com/ext/playlist.m3u8" },
+                                              { "content_type": "video/mp4", "bitrate": 832000, "url": "https://video.twimg.com/ext/640x360/low.mp4" },
+                                              { "content_type": "video/mp4", "bitrate": 2176000, "url": "https://video.twimg.com/ext/1280x720/high.mp4" }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "entryId": "cursor-bottom-module123",
+                    "content": {
+                      "value": "cursor_next_module_page"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
