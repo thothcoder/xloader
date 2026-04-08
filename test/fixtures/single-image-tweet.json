@@ -1,0 +1,57 @@
+{
+  "data": {
+    "user": {
+      "result": {
+        "timeline_v2": {
+          "timeline": {
+            "instructions": [
+              {
+                "type": "TimelineAddEntries",
+                "entries": [
+                  {
+                    "entryId": "tweet-1234567890",
+                    "content": {
+                      "itemContent": {
+                        "tweet_results": {
+                          "result": {
+                            "__typename": "Tweet",
+                            "rest_id": "1234567890",
+                            "legacy": {
+                              "id_str": "1234567890",
+                              "created_at": "Wed Mar 15 12:00:00 +0000 2026",
+                              "extended_entities": {
+                                "media": [
+                                  {
+                                    "type": "photo",
+                                    "media_url_https": "https://pbs.twimg.com/media/test123.jpg",
+                                    "original_info": {
+                                      "width": 1920,
+                                      "height": 1080
+                                    },
+                                    "sizes": {
+                                      "large": { "w": 1920, "h": 1080 }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "entryId": "cursor-bottom-abc123",
+                    "content": {
+                      "value": "cursor_next_page_abc123"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
