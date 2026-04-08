@@ -159,6 +159,19 @@ export function parseTimelineResponse(data: Any): PaginationResult {
           continue;
         }
 
+        // Module entries (used by UserMedia grid)
+        if (entry.content?.__typename === "TimelineTimelineModule" || entry.content?.items) {
+          const moduleItems: Any[] = entry.content.items ?? [];
+          for (const moduleItem of moduleItems) {
+            const modItemContent = moduleItem.item?.itemContent;
+            if (!modItemContent?.tweet_results) continue;
+            const tweet = unwrapTweet(modItemContent.tweet_results.result);
+            if (!tweet) continue;
+            items.push(...extractMediaFromTweet(tweet));
+          }
+          continue;
+        }
+
         // Tweet entries
         const itemContent = entry.content?.itemContent;
         if (!itemContent) continue;

@@ -6,6 +6,7 @@ import videoTweet from "../fixtures/video-tweet.json";
 import gifTweet from "../fixtures/gif-tweet.json";
 import visibilityResults from "../fixtures/visibility-results-tweet.json";
 import noMedia from "../fixtures/no-media-tweet.json";
+import moduleTimeline from "../fixtures/module-timeline.json";
 import userResponse from "../fixtures/user-response.json";
 
 describe("parseTimelineResponse", () => {
@@ -91,6 +92,26 @@ describe("parseTimelineResponse", () => {
     expect(parseTimelineResponse(undefined).items).toHaveLength(0);
     expect(parseTimelineResponse({}).items).toHaveLength(0);
     expect(parseTimelineResponse({ data: {} }).items).toHaveLength(0);
+  });
+
+  it("parses TimelineTimelineModule entries (UserMedia grid)", () => {
+    const result = parseTimelineResponse(moduleTimeline);
+    expect(result.items).toHaveLength(2);
+
+    const photo = result.items[0];
+    expect(photo.tweetId).toBe("1111111111");
+    expect(photo.type).toBe("photo");
+    expect(photo.width).toBe(1600);
+    expect(photo.mediaUrl).toContain("name=orig");
+
+    const video = result.items[1];
+    expect(video.tweetId).toBe("2222222222");
+    expect(video.type).toBe("video");
+    expect(video.bitrate).toBe(2176000);
+    expect(video.durationMs).toBe(15000);
+    expect(video.mediaUrl).toContain("1280x720/high.mp4");
+
+    expect(result.nextCursor).toBe("cursor_next_module_page");
   });
 
   it("handles malformed entries gracefully", () => {
