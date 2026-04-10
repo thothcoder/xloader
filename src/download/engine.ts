@@ -117,7 +117,7 @@ export async function downloadSelected(
 
   // Trigger download
   const url = URL.createObjectURL(blob);
-  const filename = `${screenName}_media.zip`;
+  const filename = `${sanitize(screenName) || "xloader"}_media.zip`;
 
   // Use chrome.downloads API if available (offscreen context)
   if (typeof chrome !== "undefined" && chrome.downloads) {

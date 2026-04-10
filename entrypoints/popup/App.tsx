@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "preact/hooks";
-import type { MediaItem, UserProfile, DownloadProgress } from "../../src/types";
+import type { MediaItem, UserProfile, DownloadProgress, Session } from "../../src/types";
 import { SearchState } from "./components/SearchState";
 import { GalleryState } from "./components/GalleryState";
 import { DownloadState } from "./components/DownloadState";
@@ -7,6 +7,7 @@ import { DownloadState } from "./components/DownloadState";
 type AppState = "search" | "loading" | "gallery" | "downloading" | "error";
 
 export function App() {
+  const [ready, setReady] = useState(false);
   const [state, setState] = useState<AppState>("search");
   const [username, setUsername] = useState("");
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -16,8 +17,30 @@ export function App() {
   const [loadingCount, setLoadingCount] = useState(0);
   const [downloadProgress, setDownloadProgress] = useState<DownloadProgress | null>(null);
 
-  // Auto-populate username from current tab
+  // Hydrate state from background session on popup open
   useEffect(() => {
+    chrome.runtime.sendMessage({ type: "GET_SESSION" }, (session: Session) => {
+      if (chrome.runtime.lastError || !session) {
+        setReady(true);
+        return;
+      }
+      if (session.state !== "search") {
+        setState(session.state);
+        setUsername(session.username);
+        setUser(session.user);
+        setItems(session.items);
+        setSelectedIds(new Set(session.selectedIds));
+        setDownloadProgress(session.downloadProgress);
+        setError(session.error);
+        setLoadingCount(session.loadingCount);
+      }
+      setReady(true);
+    });
+  }, []);
+
+  // Auto-populate username from current tab (only when starting fresh)
+  useEffect(() => {
+    if (!ready || state !== "search") return;
     chrome.tabs?.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]?.id) {
         chrome.tabs.sendMessage(
@@ -32,7 +55,7 @@ export function App() {
         );
       }
     });
-  }, []);
+  }, [ready, state]);
 
   // Listen for progress updates from background
   useEffect(() => {
@@ -60,9 +83,25 @@ export function App() {
     return () => chrome.runtime.onMessage.removeListener(listener);
   }, []);
 
+  // Persist selection changes to background session
+  const handleSelectionChange = useCallback((ids: Set<string>) => {
+    setSelectedIds(ids);
+    chrome.runtime.sendMessage({
+      type: "UPDATE_SESSION",
+      patch: { selectedIds: [...ids] },
+    });
+  }, []);
+
   const handleSearch = useCallback(async () => {
     const name = username.replace(/^@/, "").trim();
     if (!name) return;
+
+    // Clear stale session before starting a new search
+    chrome.runtime.sendMessage({ type: "CLEAR_SESSION" });
+    chrome.runtime.sendMessage({
+      type: "UPDATE_SESSION",
+      patch: { username: name, state: "loading" },
+    });
 
     setState("loading");
     setItems([]);
@@ -88,6 +127,10 @@ export function App() {
     }
 
     setUser(userResult.user);
+    chrome.runtime.sendMessage({
+      type: "UPDATE_SESSION",
+      patch: { user: userResult.user },
+    });
 
     // Load media
     const result = await chrome.runtime.sendMessage({
@@ -129,11 +172,23 @@ export function App() {
     if (state === "loading") {
       chrome.runtime.sendMessage({ type: "CANCEL_LOAD" });
     }
+    chrome.runtime.sendMessage({ type: "CLEAR_SESSION" });
     setState("search");
     setItems([]);
     setUser(null);
     setSelectedIds(new Set());
   }, [state]);
+
+  if (!ready) {
+    return (
+      <div class="state">
+        <div class="header">
+          <div class="logo">X</div>
+          <h1>xloader</h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div class="state">
@@ -170,7 +225,7 @@ export function App() {
           user={user}
           items={items}
           selectedIds={selectedIds}
-          onSelectionChange={setSelectedIds}
+          onSelectionChange={handleSelectionChange}
           onDownload={handleDownload}
           onBack={handleBack}
         />
