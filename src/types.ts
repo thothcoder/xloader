@@ -40,11 +40,27 @@ export interface PaginationResult {
   total: number;
 }
 
+/** Persisted session state (survives popup close) */
+export interface Session {
+  state: "search" | "loading" | "gallery" | "downloading" | "error";
+  username: string;
+  user: UserProfile | null;
+  items: MediaItem[];
+  selectedIds: string[]; // Array, not Set (must be JSON-serializable)
+  downloadProgress: DownloadProgress | null;
+  error: string;
+  loadingCount: number;
+  updatedAt: number;
+}
+
 /** Messages between popup and background */
 export type BackgroundMessage =
   | { type: "RESOLVE_USER"; screenName: string }
   | { type: "LOAD_MEDIA"; restId: string; cursor?: string }
-  | { type: "CANCEL_LOAD" };
+  | { type: "CANCEL_LOAD" }
+  | { type: "GET_SESSION" }
+  | { type: "UPDATE_SESSION"; patch: Partial<Session> }
+  | { type: "CLEAR_SESSION" };
 
 /** Messages between popup/background and offscreen */
 export type DownloadMessage =
